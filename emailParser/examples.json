@@ -1,0 +1,15 @@
+{
+    "email-test-cases" :["Hello, please process my payment with 4111111111111111. Thanks!",
+    "Hi, my new card is 4111 1111 1111 1111. Let me know if you need anything else.",
+    "Dear customer support, I made a mistake while entering my card 5500-0000-0000-0004. Can you update it?",
+    "Hey Mike, just booked the hotel! Used my card 6011 0000 0000 0004 for the reservation.",
+    "Thanks for the help! By the way, my new card is 3400-000000-00009, but don't share it.",
+    "My phone number is 987-654-3210, and my zip code is 10001.",
+    "Here's my card number: 1234-5678-9101-1121.",
+    "Hey, can we meet on 2024-10-15 at 10:30 AM?",
+    "The invoice number is 4011-2345-6789, but that’s not my card.",
+    "My card ends in 1234. Let me know if you need the rest."
+    ]
+
+
+}
