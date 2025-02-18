@@ -1,0 +1,41 @@
+/* Style for a warning banner */
+.warning-banner {
+  background-color: #ffcccc;
+  color: #900;
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid #900;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 9999;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  padding: 10px;
+}
+
+h2 {
+  font-size: 18px;
+  color: #333;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #95b1e6;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}

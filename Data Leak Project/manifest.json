@@ -1,0 +1,36 @@
+{
+	"manifest_version": 3,
+	"name": "Email Security Extension",
+	"version": "1.0",
+	"description": "Detect and prevent emails with critical information from being sent.",
+	"permissions": [
+		"activeTab",
+		"scripting",
+		"tabs",
+		"storage",
+		"notifications"
+	],
+	"host_permissions": [
+		"https://mail.google.com/*"
+	],
+	"background": {
+		"service_worker": "background.js"
+	},
+	"action": {
+		"default_popup": "popup.html",
+		"default_icon": "Icons/default_icon.png"
+	},
+	"content_scripts": [
+		{
+			"matches": [
+				"https://mail.google.com/*"
+			],
+			"js": [
+				"content.js"
+			],
+			"css": [
+				"styles.css"
+			]
+		}
+	]
+}
