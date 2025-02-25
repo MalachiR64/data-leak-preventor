@@ -25,7 +25,10 @@ document.getElementById('scanEmails').addEventListener('click', () => {
         function: () => alert("Scanning emails for sensitive data...")
       });
     } else {
-      alert("This extension only works on Gmail.");
+      chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: () => alert("This extension only works on Gmail.")
+      });
     }
   });
 });
