@@ -11,21 +11,65 @@ document.getElementById('toggleFeature').addEventListener('change', (event) => {
   console.log("Feature toggled:", event.target.checked);
 });
 
-// Handle button click (example of sending a message to content.js)
-document.getElementById('scanEmails').addEventListener('click', () => {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    if (tabs.length === 0) return; // No active tab found
-    
-    const tab = tabs[0];
-    
-    // Check if the tab's URL belongs to Gmail
-    if (tab.url && tab.url.includes("mail.google.com")) {
-      chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        function: () => alert("Scanning emails for sensitive data...")
-      });
-    } else {
-      alert("This extension only works on Gmail.");
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("scanEmails").addEventListener("click", async () => {
+    try {
+      const token = await requestAuthToken();
+      const messages = await fetchEmails(token);
+
+      if (messages.length === 0) {
+        alert("No emails found.");
+        return;
+      }
+
+      let emailList = "Recent Emails:\n";
+      for (let msg of messages) {
+        let subject = await getEmailTitle(token, msg.id);
+        emailList += `- ${subject}\n`;
+      }
+
+      alert(emailList);
+    } catch (error) {
+      console.error("Error fetching emails:", error);
+      alert("Failed to fetch emails. Please check permissions.");
     }
   });
 });
+
+// Request access token from background.js
+function requestAuthToken() {
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage({ action: "authenticate" }, (response) => {
+      if (response.error) {
+        reject(response.error);
+      } else {
+        resolve(response.token);
+      }
+    });
+  });
+}
+
+// Fetch recent emails
+async function fetchEmails(accessToken) {
+  const response = await fetch("https://www.googleapis.com/gmail/v1/users/me/messages", {
+    method: "GET",
+    headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" }
+  });
+
+  const data = await response.json();
+  return data.messages ? data.messages.slice(0, 5) : [];
+}
+
+// Get email subject by message ID
+async function getEmailTitle(accessToken, messageId) {
+  const response = await fetch(`https://www.googleapis.com/gmail/v1/users/me/messages/${messageId}`, {
+    method: "GET",
+    headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" }
+  });
+
+  const emailData = await response.json();
+  const headers = emailData.payload.headers;
+  const subjectHeader = headers.find(header => header.name === "Subject");
+  return subjectHeader ? subjectHeader.value : "No Subject";
+}
+

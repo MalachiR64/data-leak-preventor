@@ -7,9 +7,16 @@
 		"activeTab",
 		"scripting",
 		"tabs",
+		"identity",
 		"storage",
 		"notifications"
 	],
+	"oauth2": {
+		"client_id": "794046597479-0jrggfu6luvkgd3os6jqmt26mg7k3knv.apps.googleusercontent.com",
+		"scopes": [
+		  "https://www.googleapis.com/auth/gmail.readonly"
+		]
+	  },
 	"host_permissions": [
 		"https://mail.google.com/*"
 	],
