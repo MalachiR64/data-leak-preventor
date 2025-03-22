@@ -1,41 +1,63 @@
-/* Style for a warning banner */
-.warning-banner {
-  background-color: #ffcccc;
-  color: #900;
-  font-size: 16px;
-  padding: 10px;
-  border: 1px solid #900;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  z-index: 9999;
-}
-
 body {
   font-family: Arial, sans-serif;
+  padding: 20px;
+  width: 350px;
+  /* Adjust the width to make it more spacious */
+}
+
+#titleBar {
+  width: 100%;
   padding: 10px;
+  font-size: 24px;
+  text-align: center;
+  color: white;
+  background-color: forestgreen;
+  margin-bottom: 20px;
+  /* Space between the title bar and the rest of the content */
 }
 
 h2 {
-  font-size: 18px;
-  color: #333;
+  text-align: center;
+  margin-top: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 16px;
 }
 
 button {
-  background-color: #007bff;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: forestgreen;
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 button:hover {
-  background-color: #95b1e6;
+  background-color: darkgreen;
 }
 
-input[type="checkbox"] {
-  margin-right: 10px;
+p {
+  text-align: center;
+  margin-top: 20px;
+}
+
+a {
+  color: forestgreen;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.floatUnderline{
+  text-decoration: underline;
+  color: red;
+  background-color: transparent;
 }

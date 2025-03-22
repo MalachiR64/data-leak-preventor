@@ -1,10 +1,4 @@
+// background.js - Placeholder for background tasks if needed
 chrome.runtime.onInstalled.addListener(() => {
-  console.log("Extension installed");
-});
-
-// Example of listening for tab updates
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (changeInfo.status === 'complete' && tab.url.includes("mail.google.com")) {
-    console.log("Gmail page loaded");
-  }
+  console.log("Email Security Extension Installed!");
 });

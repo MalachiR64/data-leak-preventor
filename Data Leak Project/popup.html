@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Email Security Popup</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+  <!-- Title Bar with green background and Leak Lock text -->
+  <div id="titleBar"
+    style="background-color: forestgreen; color: white; text-align: center; padding: 10px; font-size: 24px; font-weight: bold;">
+    Leak Lock
+  </div>
+
+  <!-- Email Security Extension Title -->
   <h2>Email Security Extension</h2>
+
+  <!-- Toggle switch for enabling/disabling the feature -->
   <label>
     <input type="checkbox" id="toggleFeature" />
     Enable Sensitive Data Warnings
   </label>
+
+  <!-- Button to trigger the scanning of emails -->
   <button id="scanEmails">Scan for Sensitive Data</button>
 
+  <!-- Link to the Leak Lock website -->
+  <p><a href="https://www.figma.com/design/Ju4DVedgLqu2k0PQc2E8ss/Figma-basics?node-id=1669-162202&t=Zn8cLWhn88ZwoNGh-1"
+      target="_blank">Visit Leak Lock Website</a></p>
+
+  <!-- Link to external script -->
   <script src="popup.js"></script>
+
+
+  
 </body>
+
 </html>

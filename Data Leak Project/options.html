@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+  <!-- Specifies the character encoding for the document -->
   <meta charset="UTF-8">
+
+  <!-- Ensures the page scales correctly on different screen sizes (for mobile responsiveness) -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Title that appears on the browser tab for this page -->
   <title>Extension Options</title>
+
+  <!-- Link to an external stylesheet for the options page -->
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+  <!-- Header for the options page -->
   <h1>Extension Options</h1>
+
+  <!-- Label for the checkbox allowing the user to enable/disable sensitive data warnings -->
   <label>
+    <!-- Checkbox input to toggle the sensitive data warnings on/off -->
     <input type="checkbox" id="enableWarning" />
     Enable Sensitive Data Warnings
   </label>
-  <script src="options.js"></script>
-</body>
-</html>
+
+  <!-- Linking the JavaScript file that will handle the logic of saving and loading the user's preferences -->
+  <script src
