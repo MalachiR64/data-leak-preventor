@@ -44,26 +44,23 @@ function scanEmailForSensitiveData() {
 
     if (emailBody) {
       const emailText = emailBody.innerText || emailBody.textContent; // Get the raw email text
-
+      console.log("Email text checking:", emailText); // Log the email text for debugging
       // Regular expressions to detect sensitive data
       const creditCardRegex = /\b(?:\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{4}|\d{16})\b/g;
       const ssnRegex = /\b\d{3}[-]?\d{2}[-]?\d{4}\b/g;
 
-      // Check if sensitive data like credit card numbers or SSNs are present
-      const foundCreditCard = creditCardRegex.test(emailText);
-      const foundSSN = ssnRegex.test(emailText);
+      const foundCreditCards = emailText.match(creditCardRegex) || [];
+      const foundSSNs = emailText.match(ssnRegex) || [];
 
-      if (foundCreditCard || foundSSN) {
-        // Highlight the sensitive data
-        emailBody.innerHTML = emailBody.innerHTML.replace(creditCardRegex, (match) => {
-          return `<span style="background-color: red; color: white; font-weight: bold;">${match}</span>`;
-        });
-
-        emailBody.innerHTML = emailBody.innerHTML.replace(ssnRegex, (match) => {
-          return `<span style="background-color: red; color: white; font-weight: bold;">${match}</span>`;
-        });
-        
-        alert("Sensitive data detected!");
+      if (foundCreditCards.length > 0 || foundSSNs.length > 0) {
+        let message = "Found sensitive information:\n";
+        if (foundCreditCards.length > 0) {
+          message += `Credit Card Numbers: ${foundCreditCards.join(", ")}\n`;
+        }
+        if (foundSSNs.length > 0) {
+          message += `Social Security Numbers: ${foundSSNs.join(", ")}`;
+        }
+        alert(message);
       } else {
         alert("No sensitive data found.");
       }
