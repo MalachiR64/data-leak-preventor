@@ -30,6 +30,26 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Luhn Algorithm to validate credit card number
+function isValidCreditCard(number) {
+    let sum = 0;
+    let alternate = false;
+    
+    for (let i = number.length - 1; i >= 0; i--) {
+        let digit = parseInt(number[i]);
+
+        if (alternate) {
+            digit *= 2;
+            if (digit > 9) digit -= 9;
+        }
+
+        sum += digit;
+        alternate = !alternate;
+    }
+
+    return sum % 10 === 0; // Valid if sum is a multiple of 10
+}
+
 // Function to scan email content for sensitive data
 function scanEmailForSensitiveData() {
   chrome.storage.sync.get("enableWarning", (data) => {
@@ -45,11 +65,23 @@ function scanEmailForSensitiveData() {
     if (emailBody) {
       const emailText = emailBody.innerText || emailBody.textContent; // Get the raw email text
       console.log("Email text checking:", emailText); // Log the email text for debugging
-      // Regular expressions to detect sensitive data
-      const creditCardRegex = /\b(?:\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{4}|\d{16})\b/g;
+      
+      // Improved credit card detection with Luhn algorithm
+      const ccRegex = /\b(?:\d[ -]*?){13,19}\b/g;
+      let foundCreditCards = [];
+      
+      let match;
+      while ((match = ccRegex.exec(emailText)) !== null) {
+        const cardNumber = match[0];
+        const cleanNumber = cardNumber.replace(/\D/g, '');
+        
+        if (isValidCreditCard(cleanNumber)) {
+          foundCreditCards.push(cardNumber);
+        }
+      }
+      
+      // Regular expression for SSN (keeping the original)
       const ssnRegex = /\b\d{3}[-]?\d{2}[-]?\d{4}\b/g;
-
-      const foundCreditCards = emailText.match(creditCardRegex) || [];
       const foundSSNs = emailText.match(ssnRegex) || [];
 
       if (foundCreditCards.length > 0 || foundSSNs.length > 0) {
@@ -84,14 +116,46 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       chrome.scripting.executeScript({
         target: { tabId: tabs[0].id },
         function: () => {
+          // Define the Luhn algorithm function in this context
+          function isValidCreditCard(number) {
+            let sum = 0;
+            let alternate = false;
+            
+            for (let i = number.length - 1; i >= 0; i--) {
+              let digit = parseInt(number[i]);
+
+              if (alternate) {
+                digit *= 2;
+                if (digit > 9) digit -= 9;
+              }
+
+              sum += digit;
+              alternate = !alternate;
+            }
+
+            return sum % 10 === 0; // Valid if sum is a multiple of 10
+          }
+
+          // Get the email body
           const emailBody = document.querySelector('div[aria-label="Message Body"]');
           if (emailBody) {
             const emailText = emailBody.innerText || emailBody.textContent;
             
-            const creditCardRegex = /\b(?:\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{4}|\d{16})\b/g;
+            // Check for credit card numbers with Luhn validation
+            const ccRegex = /\b(?:\d[ -]*?){13,19}\b/g;
+            let foundCreditCard = false;
+            
+            let match;
+            while ((match = ccRegex.exec(emailText)) !== null) {
+              const cleanNumber = match[0].replace(/\D/g, '');
+              if (isValidCreditCard(cleanNumber)) {
+                foundCreditCard = true;
+                break;
+              }
+            }
+            
+            // Check for SSNs
             const ssnRegex = /\b\d{3}[-]?\d{2}[-]?\d{4}\b/g;
-
-            const foundCreditCard = creditCardRegex.test(emailText);
             const foundSSN = ssnRegex.test(emailText);
 
             if (foundCreditCard || foundSSN) {

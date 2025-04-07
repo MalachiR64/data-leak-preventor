@@ -1,0 +1,21 @@
+email text cases
+
+Hello, my card number is 4111111111111111 and my SSN is 123-45-6789. Please process my request.
+
+Here's my Amex 3400-000000-00009 and social 424-59-1888 for verification.
+
+Need to update both my Visa 4111 1111 1111 1111 and SSN 333-22-4444 in the system.
+
+My Mastercard is 5500 0000 0000 0004, and for HR purposes my SSN is 555-66-7777.
+
+Please check my Discover card 6011 0000 0000 0004 and confirm my SSN 888-99-0000 is correct.
+
+Just updating my records - card: 3400-000000-00009, SSN: 123-12-1234.
+
+The payment didn't go through on 4011-2345-6789-0123, try my SSN instead: 777-88-9999.
+
+Both my old card (5105 1051 0510 5100) and SSN (444-55-6666) need to be removed.
+
+New employee info - Amex: 3700 0000 0000 002, SSN: 999-00-1111.
+
+For verification: CC - 4012 8888 8888 1881, SSN - 111-22-3333.
