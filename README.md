@@ -33,7 +33,7 @@ Leak Lock is a Chrome extension designed to protect users from accidentally send
 1. Click the Leak Lock icon in your Chrome toolbar
 2. Enable "Sensitive Data Warnings" using the toggle switch
 3. When composing an email in Gmail, the extension will automatically scan for sensitive data
-4. If sensitive information is detected, you'll receive a warning before sending. But you still have a choice to ignore it
+4. If sensitive information is detected, you'll receive a warning before sending
 
 ## Security Features
 - Validates credit card numbers using the Luhn algorithm
